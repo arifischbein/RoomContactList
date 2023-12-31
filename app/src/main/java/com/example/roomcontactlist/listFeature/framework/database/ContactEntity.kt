@@ -1,4 +1,4 @@
-package com.example.roomcontactlist.database
+package com.example.roomcontactlist.listFeature.framework.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

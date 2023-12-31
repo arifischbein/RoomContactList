@@ -3,8 +3,8 @@ package com.example.roomcontactlist
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.roomcontactlist.database.ContactDAO
-import com.example.roomcontactlist.database.ContactDataBase
+import com.example.roomcontactlist.listFeature.framework.database.ContactDAO
+import com.example.roomcontactlist.listFeature.framework.database.ContactDataBase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

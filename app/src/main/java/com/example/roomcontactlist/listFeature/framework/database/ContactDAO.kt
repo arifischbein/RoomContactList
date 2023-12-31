@@ -1,4 +1,4 @@
-package com.example.roomcontactlist.database
+package com.example.roomcontactlist.listFeature.framework.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
