@@ -13,15 +13,16 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent :: class)
+@InstallIn(SingletonComponent::class)
 object RoomModule {
 
     private const val CONTACT_DATABASE_NAME = "contactDatabase"
 
     @Singleton
     @Provides
-    fun provideRoom(@ApplicationContext context: Context): RoomDatabase.Builder<ContactDataBase> {
+    fun provideRoom(@ApplicationContext context: Context): ContactDataBase {
         return Room.databaseBuilder(context, ContactDataBase::class.java, CONTACT_DATABASE_NAME)
+            .build()
     }
 
     @Singleton

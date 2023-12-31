@@ -16,11 +16,11 @@ interface ContactDAO {
     suspend fun deleteContact(contactEntity: ContactEntity)
 
     @Query("SELECT *  FROM contactTable ORDER BY  firstName ASC")
-    fun getContactsOrderByFirstName(): LiveData<List<ContactEntity>>
+    suspend fun getContactsOrderByFirstName(): List<ContactEntity>
 
     @Query("SELECT *  FROM contactTable ORDER BY  lastName ASC")
-    fun getContactsOrderByLastName(): LiveData<List<ContactEntity>>
+    suspend fun getContactsOrderByLastName(): List<ContactEntity>
 
     @Query("SELECT *  FROM contactTable ORDER BY  phoneNumber ASC")
-    fun getContactsOrderByPhoneNumber(): LiveData<List<ContactEntity>>
+    suspend fun getContactsOrderByPhoneNumber(): List<ContactEntity>
 }
