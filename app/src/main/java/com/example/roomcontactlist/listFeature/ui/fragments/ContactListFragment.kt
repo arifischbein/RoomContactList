@@ -1,7 +1,6 @@
 package com.example.roomcontactlist.listFeature.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,7 @@ class ContactListFragment : Fragment() {
     private lateinit var binding: FragmentContactListBinding
     private val viewModel: ContactListViewModel by viewModels()
 
-    private val contactAdapter = ContactAdapter()
+    private val contactAdapter = ContactAdapter() //TODO: inyectar - Me tiraba error
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +40,7 @@ class ContactListFragment : Fragment() {
             recyclerContact.layoutManager = LinearLayoutManager(requireContext())
             recyclerContact.setHasFixedSize(true)
         }
+        contactAdapter.deleteClickListener = { viewModel.deleteContact(it) }
     }
 
     private fun setupObservers() {

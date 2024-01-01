@@ -24,6 +24,18 @@ class ContactListViewModel @Inject constructor(private val contactDb: ContactDAO
     fun addNewContact(contact: ContactEntity) {
         viewModelScope.launch {
             contactDb.insertContact(contact)
+            val currentList = _contactListLD.value.orEmpty().toMutableList()
+            currentList.add(contact)
+            _contactListLD.value = currentList
+        }
+    }
+
+    fun deleteContact(contact: ContactEntity) {
+        viewModelScope.launch {
+            val currentList = _contactListLD.value.orEmpty().toMutableList()
+            contactDb.deleteContact(contact)
+            currentList.remove(contact)
+            _contactListLD.value = currentList
         }
     }
 

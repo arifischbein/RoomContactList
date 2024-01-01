@@ -9,6 +9,7 @@ import kotlin.properties.Delegates
 
 class ContactAdapter : RecyclerView.Adapter<ContactViewHolder>() {
     private var contacts: MutableList<ContactEntity> by Delegates.observable(mutableListOf()) { _, _, _ -> notifyDataSetChanged() }
+    lateinit var deleteClickListener: (ContactEntity) -> Unit
 
     fun setData(contacts: List<ContactEntity>) {
         this.contacts = contacts.toMutableList()
@@ -20,7 +21,7 @@ class ContactAdapter : RecyclerView.Adapter<ContactViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        holder.render(contacts[position])
+        holder.render(contacts[position], deleteClickListener)
     }
 
     override fun getItemCount(): Int {
