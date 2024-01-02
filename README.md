@@ -8,3 +8,11 @@ https://developer.android.com/training/dependency-injection/hilt-android
 
 Dagger Hilt - dependency injection: <br>
 https://dagger.dev/hilt/
+
+<br>
+<div style="display: flex; justify-content: space-between;">
+
+<img src="https://raw.githubusercontent.com/arifischbein/RoomContactList/main/assets/main_screen.png" height="400">
+
+<img src="https://raw.githubusercontent.com/arifischbein/RoomContactList/main/assets/dialog_ad_contact.png" height="400">
+</div>
