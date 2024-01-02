@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.roomcontactlist.databinding.FragmentContactListBinding
 import com.example.roomcontactlist.listFeature.adapters.ContactAdapter
+import com.example.roomcontactlist.listFeature.framework.database.ContactEntity
+import com.example.roomcontactlist.listFeature.ui.NewContactDialog
 import com.example.roomcontactlist.listFeature.ui.viewmodels.ContactListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,6 +34,16 @@ class ContactListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
         setupObservers()
+
+        binding.fabAddContact.setOnClickListener {
+            val newContactDialog = NewContactDialog()
+            newContactDialog.setCallback(object : NewContactDialog.NewContactDialogCallback {
+                override fun onPositiveClick(data: ContactEntity) {
+                    viewModel.addNewContact(data)
+                }
+            })
+            newContactDialog.show(requireActivity().supportFragmentManager, "NewContactDialog")
+        }
     }
 
     private fun setupRecycler() {
