@@ -29,7 +29,6 @@ class NewContactDialog : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DialogNewContactBinding.inflate(inflater, container, false)
-        val view = binding.root
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return binding.root
     }

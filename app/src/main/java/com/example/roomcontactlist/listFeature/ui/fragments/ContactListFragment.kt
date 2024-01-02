@@ -13,6 +13,7 @@ import com.example.roomcontactlist.listFeature.framework.database.ContactEntity
 import com.example.roomcontactlist.listFeature.ui.NewContactDialog
 import com.example.roomcontactlist.listFeature.ui.viewmodels.ContactListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ContactListFragment : Fragment() {
@@ -20,12 +21,16 @@ class ContactListFragment : Fragment() {
     private lateinit var binding: FragmentContactListBinding
     private val viewModel: ContactListViewModel by viewModels()
 
-    private val contactAdapter = ContactAdapter() //TODO: inyectar - Me tiraba error
+    @Inject
+    lateinit var newContactDialog: NewContactDialog
+
+    @Inject
+    lateinit var contactAdapter: ContactAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentContactListBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -36,7 +41,6 @@ class ContactListFragment : Fragment() {
         setupObservers()
 
         binding.fabAddContact.setOnClickListener {
-            val newContactDialog = NewContactDialog()
             newContactDialog.setCallback(object : NewContactDialog.NewContactDialogCallback {
                 override fun onPositiveClick(data: ContactEntity) {
                     viewModel.addNewContact(data)
