@@ -12,6 +12,7 @@ import com.example.roomcontactlist.listFeature.adapters.ContactAdapter
 import com.example.roomcontactlist.listFeature.framework.database.ContactEntity
 import com.example.roomcontactlist.listFeature.ui.NewContactDialog
 import com.example.roomcontactlist.listFeature.ui.viewmodels.ContactListViewModel
+import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -39,7 +40,7 @@ class ContactListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
         setupObservers()
-
+        setupChips()
         binding.fabAddContact.setOnClickListener {
             newContactDialog.setCallback(object : NewContactDialog.NewContactDialogCallback {
                 override fun onPositiveClick(data: ContactEntity) {
@@ -47,6 +48,15 @@ class ContactListFragment : Fragment() {
                 }
             })
             newContactDialog.show(requireActivity().supportFragmentManager, "NewContactDialog")
+        }
+
+        binding.chipGroupFilter.setOnCheckedStateChangeListener { group, _ ->
+            val selectedChip: Chip? = group.findViewById(binding.chipGroupFilter.checkedChipId)
+            if (selectedChip != null) {
+                val chipTag = selectedChip.tag.toString()
+                viewModel.getContactListOrderBy(chipTag)
+            }
+
         }
     }
 
@@ -65,5 +75,10 @@ class ContactListFragment : Fragment() {
         }
     }
 
+    private fun setupChips() {
+        binding.chipGroupFilter.isSingleSelection = true
+        binding.chipGroupFilter.isSelectionRequired = true
+        binding.chipByFirstName.isChecked = true
+    }
 
 }

@@ -25,7 +25,7 @@ class ContactListViewModel @Inject constructor(private val contactDb: ContactDAO
         viewModelScope.launch {
             contactDb.insertContact(contact)
             val currentList = _contactListLD.value.orEmpty().toMutableList()
-            currentList.add(contact)
+            currentList.add(0, contact)
             _contactListLD.value = currentList
         }
     }
@@ -39,9 +39,39 @@ class ContactListViewModel @Inject constructor(private val contactDb: ContactDAO
         }
     }
 
-    fun getContactListOrderByName() {
+    fun getContactListOrderBy(order: String) {
+        when (order) {
+            "FirstName" -> {
+                getContactListOrderByName()
+            }
+
+            "LastName" -> {
+                getContactListOrderByLastName()
+            }
+
+            "Phone" -> {
+                getContactListOrderByPhone()
+            }
+        }
+    }
+
+    private fun getContactListOrderByName() {
         viewModelScope.launch {
             val contacts = contactDb.getContactsOrderByFirstName()
+            _contactListLD.value = contacts
+        }
+    }
+
+    private fun getContactListOrderByLastName() {
+        viewModelScope.launch {
+            val contacts = contactDb.getContactsOrderByLastName()
+            _contactListLD.value = contacts
+        }
+    }
+
+    private fun getContactListOrderByPhone() {
+        viewModelScope.launch {
+            val contacts = contactDb.getContactsOrderByPhoneNumber()
             _contactListLD.value = contacts
         }
     }
